@@ -1,0 +1,33 @@
+> elec2021 <- read.csv("C:/Users/Jacob/OneDrive/Desktop/CSWD/2021_Campaign_Expenditure.csv")
+> options(scipen=999)
+>install.packages("dlooker")
+>library.dlookr
+> elect2<-elec2021
+> str(elect2)
+> elect2<-as.data.frame(unclass(elect2), stringsAsFactors = TRUE)
+> str(elect2)
+> attach(elect2)
+> glm(AMNT~CANCLASS)
+> summary(glm(AMNT~CANCLASS))
+> Table1 <- table(CANCLASS, OFFICECD)
+> Table1
+> NP <- elect2[elect2$CANCLASS == "NP",]
+> PT <- elect2[elect2$CANCLASS == "P",]
+> UN <- elect2[elect2$CANCLASS == "UN",]
+> t.test(PT$AMNT, UN$AMNT)
+> summary(elect2$AMNT)
+> skewness(elect2$AMNT)
+> kurtosis(elect2$AMNT)
+> table1 <-table(elect2$CANCLASS, elect2$PURPOSECD)
+> CT.data1 <-as.table(table1)
+> chisq.test(CT.data1)
+
+> table3 <- table(elect2$CANCLASS, elect2$C_CODE)
+> CT.data<- as.table(table3)
+> chisq.test(CT.data)
+
+> summary(glm(elect2$AMNT~elect2$STATE))
+
+> amntNYC<-elect2[elect2$STATE == "NY",]
+> amntOTHER<-elect2[elect2$STATE !="NY",]
+t.test(amntNYC$AMNT, amntOTHER$AMNT)
